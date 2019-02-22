@@ -2,6 +2,8 @@ package aps;
 
 public class Escalonador {
 	private int quantum;
+	private TabelaExecucao tabela;
+	
 
 	public int getQuantum() {
 		return quantum;
@@ -15,6 +17,11 @@ public class Escalonador {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public TabelaExecucao rodar() {
+		return this.tabela;
+	}
+	
 	
 	
 	
