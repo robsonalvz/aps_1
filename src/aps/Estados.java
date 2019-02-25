@@ -2,5 +2,5 @@ package aps;
 
 public enum Estados {
 	
-	Executando, Esperando, Inativo;
+	Executando, Esperando, Inativo, Finalizado;
 }

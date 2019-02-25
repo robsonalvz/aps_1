@@ -21,6 +21,11 @@ public class Escalonador {
 	public TabelaExecucao rodar() {
 		return this.tabela;
 	}
+
+	public String getTabelaRR() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

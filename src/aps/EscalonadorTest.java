@@ -8,21 +8,42 @@ import org.junit.Test;
 
 public class EscalonadorTest {
 
+	
+	//primeiro
 	@Test
-	public void test() {
-		
-		
+	public void testTresP() {
 		Escalonador escalonador = new Escalonador();
 		escalonador.setQuantum(5);
+		
 		escalonador.addProcesso("P1",0,10);
 		escalonador.addProcesso("P2",0,3);
 		escalonador.addProcesso("P3",3,3);
 		
-		//segundo
+		String tabela = escalonador.getTabelaRR();
+		
+		String tabelaTest = "RRRRRWWWWWWRRRRRF\n"+
+		                    "WWWWWRRRF\n"+
+				            "IIWWWWWWRRRF";
+		
+		assertEquals(tabela,tabelaTest);
+		
+		
+	}
+	
+	//segundo
+	@Test
+	public void testDoisP() {
+		Escalonador escalonador = new Escalonador();
+		escalonador.setQuantum(5);
+		
 		escalonador.addProcesso("P4",0,3);
 		escalonador.addProcesso("P5",5,2);
 		
-		//terceiro
+	}
+	
+	
+	
+	/*
 		escalonador.addProcesso("P6", 0, 1);
 		escalonador.addProcesso("P7", 0, 2);
 		escalonador.addProcesso("P8", 0, 4);
@@ -71,8 +92,7 @@ public class EscalonadorTest {
 			
 			assertEquals(TabelaPronta,tabelaTest);
 			
-			
-				
-		}
+			}
+		*/		
 
 }
