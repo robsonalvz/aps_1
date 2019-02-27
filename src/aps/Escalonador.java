@@ -1,8 +1,9 @@
 package aps;
 
+
 public class Escalonador {
 	private int quantum;
-	private TabelaExecucao tabela;
+	private TabelaExecucao tabela = new TabelaExecucao();
 	
 
 	public int getQuantum() {
@@ -13,19 +14,43 @@ public class Escalonador {
 		this.quantum = quantum;
 	}
 
-	public void addProcesso(String nome, int inicio, int tempo) {
-		// TODO Auto-generated method stub
-		
+	public void addProcesso(Processo processo) {
+		if(this.tabela.liberado()){
+			this.tabela.processos.add(processo);
+			processo.setStatus(Estados.Executando);
+		}	
 	}
 	
-	public TabelaExecucao rodar() {
-		return this.tabela;
+	public void removeProcesso(String nomeProcesso){
+		for (int i = 0; i<this.tabela.processos.size(); i++){
+			if(this.tabela.processos.get(i).getNome().equals(nomeProcesso)){
+				this.tabela.processos.remove(this.tabela.processos.get(i));
+			}
+		}
 	}
 
-	public String getTabelaRR() {
-		// TODO Auto-generated method stub
-		return null;
+	public void mudarStatus (String nomeProcesso){
+		for (int i = 0; i < this.tabela.processos.size(); i++){
+			if(this.tabela.processos.get(i).getNome().equals(nomeProcesso)){
+				int resta = this.tabela.processos.get(i).getDuracao() - this.quantum;
+				if(resta > 0){
+					
+					this.tabela.processos.get(i).setStatus(Estados.Esperando);
+				
+				}else if(resta <= 0){			
+					
+					this.tabela.processos.get(i).setStatus(Estados.Finalizado);
+				
+				}else if(!(this.tabela.processos.contains(this.tabela.processos.get(i)))){
+					
+					this.tabela.processos.get(i).setStatus(Estados.Inativo);
+				
+				}
+				
+			}
+		}
 	}
+	
 	
 	
 	
