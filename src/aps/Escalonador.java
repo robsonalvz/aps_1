@@ -26,6 +26,11 @@ public class Escalonador {
 	public Estados estadoDoProcesso() {
 		return this.processo.estado;
 	}
+
+	public String getTabelaRR() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

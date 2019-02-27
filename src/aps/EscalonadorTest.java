@@ -8,21 +8,42 @@ import org.junit.Test;
 
 public class EscalonadorTest {
 
+	
+	//primeiro
 	@Test
-	public void test() {
-		
-		
+	public void testTresP() {
 		Escalonador escalonador = new Escalonador();
 		escalonador.setQuantum(5);
+		
 		escalonador.addProcesso("P1",0,10);
 		escalonador.addProcesso("P2",0,3);
 		escalonador.addProcesso("P3",3,3);
 		
-		//segundo
+		String tabela = escalonador.getTabelaRR();
+		
+		String tabelaTest = "RRRRRWWWWWWRRRRRF\n"+
+		                    "WWWWWRRRF\n"+
+				            "IIWWWWWWRRRF";
+		
+		assertEquals(tabela,tabelaTest);
+		
+		
+	}
+	
+	//segundo
+	@Test
+	public void testDoisP() {
+		Escalonador escalonador = new Escalonador();
+		escalonador.setQuantum(5);
+		
 		escalonador.addProcesso("P4",0,3);
 		escalonador.addProcesso("P5",5,2);
 		
-		//terceiro
+	}
+	
+	
+	
+	/*
 		escalonador.addProcesso("P6", 0, 1);
 		escalonador.addProcesso("P7", 0, 2);
 		escalonador.addProcesso("P8", 0, 4);
@@ -52,22 +73,26 @@ public class EscalonadorTest {
 			assertEquals(Estados.Executando, tabela.getStatus("P14",11));
 			assertEquals(Estados.Executando, tabela.getStatus("P15",11));
 			
-			System.out.println("P1: RRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRR");
-			System.out.println("P2: WWWWWRRR");
-			System.out.println("P3:    WWWWWRRR");
-			System.out.println("P4: WWWWWWWWWWWRRR");
-			System.out.println("P5:      WWWWWWWWWRR");
-			System.out.println("P6: WWWWWWWWWWWWWWWWR");
-			System.out.println("P7: WWWWWWWWWWWWWWWWWRR");
-			System.out.println("P8: WWWWWWWWWWWWWWWWWWWRRRR");
-			System.out.println("P9: WWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR");
-			System.out.println("P10:WWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWRRR");
-			System.out.println("P11:           WWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWRRR");
-			System.out.println("P12:           WWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWR");
-			System.out.println("P13:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRR");
-			System.out.println("P14:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRR");
-			System.out.println("P15:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR");
-				
-		}
+			String TabelaPronta = tabela.getTabelaFinal();
+			String tabelaTest = ("P1: RRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRR\n"+
+					"P2: WWWWWRRR\n" +
+					"P3:    WWWWWRRR\n" +
+					"P4: WWWWWWWWWWWRRR\n" +
+					"P5:      WWWWWWWWWRR\n" +
+					"P6: WWWWWWWWWWWWWWWWR\n" +
+					"P7: WWWWWWWWWWWWWWWWWRR\n" +
+					"P8: WWWWWWWWWWWWWWWWWWWRRRR\n" +
+					"P9: WWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR\n" +
+					"P10:WWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWRRR\n" +
+					"P11:           WWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWRRR\n" +
+					"P12:           WWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWR\n" +
+					"P13:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRR\n" +
+					"P14:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRR\n" +
+					"P15:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR");
+			
+			assertEquals(TabelaPronta,tabelaTest);
+			
+			}
+		*/		
 
 }
