@@ -1,26 +1,38 @@
 package aps;
 
+import java.util.ArrayList;
+import java.util.List;
+ 
 public class Escalonador {
 	private int quantum;
-	private TabelaExecucao tabela;
+	private ArrayList<Processo> processos = new ArrayList<Processo>();
+	private Processo processo;
 	
-
 	public int getQuantum() {
 		return quantum;
 	}
 
-	public void setQuantum(int quantum) {
-		this.quantum = quantum;
-	}
 
-	public void addProcesso(String nome, int inicio, int tempo) {
-		// TODO Auto-generated method stub
+	public void addProcesso(Processo processo) {
 		
+		this.processos.add(processo);
+			
 	}
 	
-	public TabelaExecucao rodar() {
-		return this.tabela;
+	public void removeProcesso(Processo processo) {
+		this.processos.remove(processo);
 	}
+	
+	public Estados estadoDoProcesso() {
+		return this.processo.estado;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
