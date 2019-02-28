@@ -1,95 +1,63 @@
 package aps;
 
-import static org.junit.Assert.*;
-import java.util.List;
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 public class EscalonadorTest {
 
 	
-	//primeiro
+	/*Teste com 3 processos*/
 	@Test
-	public void testTresP() {
-		Escalonador escalonador = new Escalonador();
-		escalonador.setQuantum(5);
-		
+	public void testeTresProcessos() {
+		Escalonador escalonador = new Escalonador(5);
 		escalonador.addProcesso("P1",0,10);
 		escalonador.addProcesso("P2",0,3);
 		escalonador.addProcesso("P3",3,3);
-		
 		String tabela = escalonador.getTabelaRR();
-		
 		String tabelaTest = "RRRRRWWWWWWRRRRRF\n"+
 		                    "WWWWWRRRF\n"+
 				            "IIWWWWWWRRRF";
-		
+	}
+	/*Teste com 2 processos*/
+	@Test
+	public void testeDoisProcessosComTempoInexistente() {
+		Escalonador escalonador = new Escalonador(3);
+		escalonador.addProcesso("P4",0,3);
+		escalonador.addProcesso("P5",5,2);
+		String tabela = escalonador.getTabelaRR();
+		String tabelaTest = "RRRF\n"
+				+ "IIIIRRF";
 		assertEquals(tabela,tabelaTest);
 		
 	}
-	
-	//segundo
+	/*Teste com processos desordenados com quantum 2*/
 	@Test
-	public void testDoisP() {
-		Escalonador escalonador = new Escalonador();
-		escalonador.setQuantum(5);
-		
-		escalonador.addProcesso("P4",0,3);
-		escalonador.addProcesso("P5",5,2);
-		
+	public void testeQuatroProcessosDesordenados(){
+		Escalonador escalonador = new Escalonador(2);
+		escalonador.addProcesso("P1",1,2);
+		escalonador.addProcesso("P2",0,1);
+		escalonador.addProcesso("P3",5,5);	
+		escalonador.addProcesso("P4",4,1);
+		String tabela = escalonador.getTabelaRR();
+		String tabelaTest = "IRRF\n"
+				+ "RF\n"
+				+ "IIIIIRRRRRF\n"
+				+ "IIIIRF";
+		assertEquals(tabela,tabelaTest);
+	}
+	@Test
+	public void testeQuantumZero(){
+		Escalonador escalonador = new Escalonador(0);
+		escalonador.addProcesso("P1",0,2);
+		assertEquals(0,escalonador.getQuantum());		
+	}
+	@Test
+	public void testeQuantumNegativo(){
+		Escalonador escalonador = new Escalonador(-1);
+		escalonador.addProcesso("P1",0,2);
+		assertEquals(0,escalonador.getQuantum());		
 	}
 	
-	/*
-		escalonador.addProcesso("P6", 0, 1);
-		escalonador.addProcesso("P7", 0, 2);
-		escalonador.addProcesso("P8", 0, 4);
-		escalonador.addProcesso("P9", 0, 6);
-		escalonador.addProcesso("P10", 0, 8);
-		escalonador.addProcesso("P11", 11, 8);
-		escalonador.addProcesso("P12", 11, 6);
-		escalonador.addProcesso("P13", 11, 4);
-		escalonador.addProcesso("P14", 11, 2);
-		escalonador.addProcesso("P15", 11, 1);
-		
-		TabelaExecucao tabela = escalonador.rodar();
-			
-			assertEquals(Estados.Executando, tabela.getStatus("P1",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P2",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P3",3));
-			assertEquals(Estados.Executando, tabela.getStatus("P4",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P5",5));
-			assertEquals(Estados.Executando, tabela.getStatus("P6",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P7",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P8",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P9",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P10",0));
-			assertEquals(Estados.Executando, tabela.getStatus("P11",11));
-			assertEquals(Estados.Executando, tabela.getStatus("P12",11));
-			assertEquals(Estados.Executando, tabela.getStatus("P13",11));
-			assertEquals(Estados.Executando, tabela.getStatus("P14",11));
-			assertEquals(Estados.Executando, tabela.getStatus("P15",11));
-			
-			String TabelaPronta = tabela.getTabelaFinal();
-			String tabelaTest = ("P1: RRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRR\n"+
-					"P2: WWWWWRRR\n" +
-					"P3:    WWWWWRRR\n" +
-					"P4: WWWWWWWWWWWRRR\n" +
-					"P5:      WWWWWWWWWRR\n" +
-					"P6: WWWWWWWWWWWWWWWWR\n" +
-					"P7: WWWWWWWWWWWWWWWWWRR\n" +
-					"P8: WWWWWWWWWWWWWWWWWWWRRRR\n" +
-					"P9: WWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR\n" +
-					"P10:WWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWWWRRR\n" +
-					"P11:           WWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWWWRRR\n" +
-					"P12:           WWWWWWWWWWWWWWWWWWWWWWWWWWWRRRRRWWWWWWWWWWWWWWWWWWWWWWR\n" +
-					"P13:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRRRR\n" +
-					"P14:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWRR\n" +
-					"P15:           WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR");
-			
-			assertEquals(TabelaPronta,tabelaTest);
-			
-			}
-		*/		
 
 }
