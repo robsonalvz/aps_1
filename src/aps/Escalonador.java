@@ -1,10 +1,13 @@
 package aps;
 
 public class Escalonador {
+	
 	private int quantum;
 	private TabelaExecucao tabela = new TabelaExecucao();
 
-	
+	public Escalonador(int quantum){
+		this.quantum = quantum;
+	}
 	public int getQuantum() {
 		return quantum;
 	}
