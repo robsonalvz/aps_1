@@ -27,7 +27,6 @@ public class EscalonadorTest {
 		
 		assertEquals(tabela,tabelaTest);
 		
-		
 	}
 	
 	//segundo
@@ -40,8 +39,6 @@ public class EscalonadorTest {
 		escalonador.addProcesso("P5",5,2);
 		
 	}
-	
-	
 	
 	/*
 		escalonador.addProcesso("P6", 0, 1);
