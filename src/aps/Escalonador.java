@@ -17,11 +17,11 @@ public class Escalonador {
 	}
 
 
-	public void addProcesso(Processo processo) {		
+	public void addProcesso(String nome, int inicio, int tempo) {		
 		if(this.tabela.liberado()){
-
- 			this.tabela.processos.add(processo);
-			processo.setStatus(Estados.Executando);
+			Processo p = new Processo(nome,inicio,tempo, Estados.Inativo);
+ 			this.tabela.processos.add(p);
+			p.setStatus(Estados.Executando);
 		}	
 	}
 	
@@ -50,20 +50,12 @@ public class Escalonador {
 					this.tabela.processos.get(i).setStatus(Estados.Inativo);
 				
 				}
-				
 			}
 		}
 	}
 
-
 	public void setQuantum(int i) {
 		this.quantum = i;
-		
-	}
-
-
-	public void addProcesso(String string, int i, int j) {
-		// TODO Auto-generated method stub
 		
 	}
 
