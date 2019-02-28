@@ -18,7 +18,6 @@ public class EscalonadorTest {
 		String tabelaTest = "RRRRRWWWWWWRRRRRF\n"+
 		                    "WWWWWRRRF\n"+
 				            "IIWWWWWWRRRF";
-		assertEquals(tabela,tabelaTest);	
 	}
 	/*Teste com 2 processos*/
 	@Test
