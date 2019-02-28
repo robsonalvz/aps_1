@@ -59,6 +59,17 @@ public class EscalonadorTest {
 		escalonador.addProcesso("P1",0,2);
 		assertEquals(0,escalonador.getQuantum());		
 	}
+	@Test
+	public void testeProcessosSeguidos(){
+		Escalonador escalonador = new Escalonador(2);
+		escalonador.addProcesso("P1",0,2);
+		escalonador.addProcesso("P2",2,2);
+		String tabela = escalonador.getTabelaRR();
+		String tabelaTest = "RRRF\n"
+				+ "WWRRF";
+		assertEquals(tabela,tabelaTest);
+		
+	}
 	
 
 }
