@@ -7,11 +7,9 @@ package aps;
 	private int chegada;
 	private Estados status;
 
- 	public Processo(String nome, int duracao, int tempoExecucao, int chegada, Estados status) {
+ 	public Processo(String nome, int duracao, Estados status) {
 		this.nome = nome;
 		this.duracao = duracao;
-		this.tempoExecucao = tempoExecucao;
-		this.chegada = chegada;
 		this.status = status;
 	}
 
