@@ -1,54 +1,33 @@
 package aps;
 
-public class Processo {
-	String nomeProcesso;
-	int tempoEspera;
-	int tempoDeExecucao;
-	int tempoInativo;
-	int duracao;
-	int momentoEntrada;
-	int momentoSaida;
-	int momentoDuracao;
-	Estados estado;
-	
-	public Processo(String nomeProcesso, int tempoEspera, int tempoDeExecucao, int tempoInativo, int duracao, int momentoEntrada, int momentoSaida, int momentoDuracao, Estados estado) {
-		
-		this.nomeProcesso = nomeProcesso;
-		this.tempoEspera = tempoEspera;
-		this.tempoDeExecucao = tempoDeExecucao;
-		this.tempoInativo = tempoInativo;
+ public class Processo {
+	private String nome;
+	private int duracao;
+	private int tempoExecucao;
+	private int chegada;
+	private Estados status;
+
+ 	public Processo(String nome, int duracao, int tempoExecucao, int chegada, Estados status) {
+		this.nome = nome;
 		this.duracao = duracao;
-		this.momentoEntrada = momentoEntrada;
-		this.momentoSaida = momentoSaida;
-		this.momentoDuracao = momentoDuracao;
-		this.estado = estado;
-	}
-	
-	public Estados getEstado() {
-		return estado;
+		this.tempoExecucao = tempoExecucao;
+		this.chegada = chegada;
+		this.status = status;
 	}
 
-	public void setEstado(Estados estado) {
-		this.estado = estado;
+ 	public Processo() {
+		this.nome = null;
+		this.duracao = 0;
+		this.tempoExecucao = 0;
+		this.chegada = 0;
+		this.status = null;
 	}
 
-	public int getTempoEspera() {
-		return tempoEspera;
+ 	public String getNome() {
+		return nome;
 	}
-	public void setTempoEspera(int tempoEspera) {
-		this.tempoEspera = tempoEspera;
-	}
-	public int getTempoDeExecucao() {
-		return tempoDeExecucao;
-	}
-	public void setTempoDeExecucao(int tempoDeExecucao) {
-		this.tempoDeExecucao = tempoDeExecucao;
-	}
-	public int getTempoInativo() {
-		return tempoInativo;
-	}
-	public void setTempoInativo(int tempoInativo) {
-		this.tempoInativo = tempoInativo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public int getDuracao() {
 		return duracao;
@@ -56,32 +35,25 @@ public class Processo {
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
 	}
-	public int getMomentoEntrada() {
-		return momentoEntrada;
+	public int getTempoExecucao() {
+		return tempoExecucao;
 	}
-	public void setMomentoEntrada(int momentoEntrada) {
-		this.momentoEntrada = momentoEntrada;
+	public void setTempoExecucao(int tempoExecucao) {
+		this.tempoExecucao = tempoExecucao;
 	}
-	public int getMomentoSaida() {
-		return momentoSaida;
+	public int getChegada() {
+		return chegada;
 	}
-	public void setMomentoSaida(int momentoSaida) {
-		this.momentoSaida = momentoSaida;
+	public void setChegada(int chegada) {
+		this.chegada = chegada;
 	}
-	public int getMomentoDuracao() {
-		return momentoDuracao;
+	public Estados getStatus() {
+		return status;
 	}
-	public void setMomentoDuracao(int momentoDuracao) {
-		this.momentoDuracao = momentoDuracao;
-	}
-	public String getNomeProcesso() {
-		return nomeProcesso;
+	public void setStatus(Estados status) {
+		this.status = status;
 	}
 
-	public void setNomeProcesso(String nomeProcesso) {
-		this.nomeProcesso = nomeProcesso;
-	}
-	
-	
 
-}
+
+ }
