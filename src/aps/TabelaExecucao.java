@@ -18,7 +18,7 @@ public class TabelaExecucao {
 	
 	public boolean liberado(){
 		for(int i = 0; i < this.processos.size(); i++){
-			if(this.processos.contains(this.processo)){
+			if(this.processos.contains(processo)){
 				for(int k = 0; k < this.processos.size(); k++){
 					if(this.processos.get(k).getStatus().equals(Executando)){
 						return false;
@@ -30,8 +30,6 @@ public class TabelaExecucao {
 		}
 		return true;
 	}
-
-
 
 	public void setProcessos(ArrayList<Processo> processos) {
 		this.processos = processos;

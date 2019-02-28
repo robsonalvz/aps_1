@@ -1,6 +1,5 @@
 package aps;
 
-
 public class Escalonador {
 	private int quantum;
 	private TabelaExecucao tabela = new TabelaExecucao();
@@ -51,12 +50,4 @@ public class Escalonador {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 }
