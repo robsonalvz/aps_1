@@ -60,7 +60,13 @@ public class TabelaExecucao {
 		return null;
 	}
 	public boolean processosFinalizados(){
-		int qtd = Collections.frequency(processos, Estado.Finalizado );
+		int qtd=0;
+		for (Processo p: this.processos){
+			if (p.getStatus().equals(Estado.Finalizado)){
+				qtd++;
+			}
+		}
+		System.out.println(qtd);
 		if (qtd==processos.size()-1){
 			return true;
 		}

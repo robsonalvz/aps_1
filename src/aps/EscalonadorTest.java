@@ -6,7 +6,20 @@ import org.junit.Test;
 
 public class EscalonadorTest {
 
-	
+	/*Teste com 3 processos*/
+	@Test
+	public void testeTresProcessos() {
+		Escalonador escalonador = new Escalonador(5);
+		escalonador.addProcesso("P1",0,10);
+		escalonador.addProcesso("P2",0,3);
+		escalonador.addProcesso("P3",3,3);
+		String tabela = escalonador.getTabelaRR();
+		System.out.println(tabela);
+		String tabelaTest = "RRRRRWWWWWWRRRRF\n"+
+		                    "WWWWWRRRF\n"+
+				            "IIIWWWWWRRRF\n";
+		assertEquals(tabela,tabelaTest);
+	}
 
 	/*Teste com 2 processos*/
 	@Test
@@ -34,6 +47,7 @@ public class EscalonadorTest {
 				+ "RF\n"
 				+ "IIIIIRRRRRF\n"
 				+ "IIIIRF\n";
+		System.out.println(tabela);
 		assertEquals(tabela,tabelaTest);
 	}
 	@Test
