@@ -18,6 +18,7 @@ public class Processo {
 		int restante = 0;
 		this.linhaProcessos = new ArrayList<>();
 		
+
 	}
 
  	public Processo() {
@@ -73,4 +74,5 @@ public class Processo {
 
 
  }
+
 

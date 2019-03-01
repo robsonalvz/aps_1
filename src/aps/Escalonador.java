@@ -1,4 +1,6 @@
 package aps;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Escalonador {
 
@@ -9,13 +11,13 @@ public class Escalonador {
 	private int rodou = 0;
 
 
+
 	public Escalonador(int quantum){
 		this.quantum = quantum;
 	}
 	public int getQuantum() {
 		return quantum;
 	}
-
 
 	public void addProcesso(String nome, int i, int k) {	
 		Processo p = new Processo(nome,i,k);
@@ -90,7 +92,6 @@ public class Escalonador {
 					p.setStatus(Estados.Esperando);
 					p.adicionaStatusLinhaProcessos(Estados.W.toString());
 				}
-				
 			}
 		}
 	}
@@ -137,6 +138,5 @@ public class Escalonador {
 					}
 				}
 			}
-		
 	}
 }
