@@ -1,17 +1,29 @@
 package aps;
 
- public class Processo {
-	private String nome;
+import java.util.ArrayList;
+import java.util.Collections;
 
+public class Processo {
+	private String nome;
+	
 	private int tempoExecucao;
 	private int chegada;
-	private Estados status;
+	private Estado status;
+	private int restante;
+	private ArrayList<String> linhaProcessos;
+	private ArrayList<String> espera = new ArrayList<>();
 
- 	public Processo(String nome, int chegada, int tempoExecucao, Estados status) {
+ 	public void setLinhaProcessos(ArrayList<String> linhaProcessos) {
+		this.linhaProcessos = linhaProcessos;
+	}
+
+	public Processo(String nome, int chegada, int tempoExecucao) {
 		this.nome = nome;
 		this.chegada = chegada;
 		this.tempoExecucao = tempoExecucao;
-		this.status = status;
+		this.linhaProcessos=new ArrayList<>();
+		this.restante = tempoExecucao;
+		
 	}
 
  	public Processo() {
@@ -19,6 +31,7 @@ package aps;
 		this.chegada = 0;
 		this.tempoExecucao = 0;		
 		this.status = null;
+		this.linhaProcessos= new ArrayList<>();
 	}
 
  	public String getNome() {
@@ -39,12 +52,60 @@ package aps;
 	public void setChegada(int chegada) {
 		this.chegada = chegada;
 	}
-	public Estados getStatus() {
+	public Estado getStatus() {
 		return status;
 	}
-	public void setStatus(Estados status) {
+	public void setStatus(Estado status) {
 		this.status = status;
 	}
+
+	public String getLinhaProcessos() {
+		String resultado="";
+		for (String s : linhaProcessos){
+			resultado+=s;
+		}
+		return resultado;
+	}
+
+	public void adicionaStatusLinhaProcessos(String status) {
+		linhaProcessos.add(status);
+	}
+	public int getTempoExecutando(){
+		int qtd = Collections.frequency(linhaProcessos, "R");
+		return qtd;
+	}
+	public boolean processoFinalizado(){
+		int qtd = Collections.frequency(linhaProcessos, "F");
+		if (qtd>0)return true;
+		return false;
+	}
+	public int getRestante() {
+		return restante;
+	}
+	public void restante(int quantum){
+		this.restante -= quantum;
+	}
+	public void setRestante(int restante) {
+		this.restante = restante;
+	}
+	public String getEsperando() {
+		String esperando="";
+		for(int i = 0; i < this.getTempoExecutando(); i++) {
+			if(this.getTempoExecutando() > 0) {
+				this.espera.add("W");
+			}else {
+				this.espera.add(null);
+			}
+			
+		}
+		
+		for(String s : this.espera) {
+			esperando += s;
+		}
+		return esperando;	
+		
+	}
+
 
 
 
