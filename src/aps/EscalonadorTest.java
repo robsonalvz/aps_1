@@ -61,9 +61,10 @@ public class EscalonadorTest {
 	}*/
 	@Test
 	public void testeProcessosSeguidos(){
-		Escalonador escalonador = new Escalonador(3);
-		escalonador.addProcesso("P1",0,3);
-		escalonador.addProcesso("P2", 0,2);
+		Escalonador escalonador = new Escalonador(2);
+		escalonador.addProcesso("P1",0,1);
+		escalonador.addProcesso("P2",1,3);
+		escalonador.addProcesso("P3",1,1);
 		String tabela = escalonador.getTabelaRR();
 		System.out.println(tabela);
 		String tabelaTest = "RRRF\n"
