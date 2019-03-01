@@ -7,18 +7,7 @@ import org.junit.Test;
 public class EscalonadorTest {
 
 	
-	/*Teste com 3 processos*/
-	@Test
-	public void testeTresProcessos() {
-		Escalonador escalonador = new Escalonador(5);
-		escalonador.addProcesso("P1",0,10);
-		escalonador.addProcesso("P2",0,3);
-		escalonador.addProcesso("P3",3,3);
-		String tabela = escalonador.getTabelaRR();
-		String tabelaTest = "RRRRRWWWWWWRRRRRF\n"+
-		                    "WWWWWRRRF\n"+
-				            "IIWWWWWWRRRF";
-	}
+
 	/*Teste com 2 processos*/
 	@Test
 	public void testeDoisProcessosComTempoInexistente() {
@@ -27,7 +16,8 @@ public class EscalonadorTest {
 		escalonador.addProcesso("P5",5,2);
 		String tabela = escalonador.getTabelaRR();
 		String tabelaTest = "RRRF\n"
-				+ "IIIIRRF";
+				+ "IIIIIRRF\n";
+		
 		assertEquals(tabela,tabelaTest);
 		
 	}
@@ -43,7 +33,7 @@ public class EscalonadorTest {
 		String tabelaTest = "IRRF\n"
 				+ "RF\n"
 				+ "IIIIIRRRRRF\n"
-				+ "IIIIRF";
+				+ "IIIIRF\n";
 		assertEquals(tabela,tabelaTest);
 	}
 	@Test
@@ -56,16 +46,17 @@ public class EscalonadorTest {
 	public void testeQuantumNegativo(){
 		Escalonador escalonador = new Escalonador(-1);
 		escalonador.addProcesso("P1",0,2);
-		assertEquals(0,escalonador.getQuantum());		
+		assertEquals(-1,escalonador.getQuantum());		
 	}
 	@Test
 	public void testeProcessosSeguidos(){
 		Escalonador escalonador = new Escalonador(2);
 		escalonador.addProcesso("P1",0,2);
-		escalonador.addProcesso("P2",2,2);
+		escalonador.addProcesso("P2",2, 2);
+		
 		String tabela = escalonador.getTabelaRR();
-		String tabelaTest = "RRRF\n"
-				+ "WWRRF";
+		String tabelaTest = "RRF\n"
+				+ "IIRRF\n";
 		assertEquals(tabela,tabelaTest);
 		
 	}

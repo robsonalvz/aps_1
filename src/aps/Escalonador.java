@@ -1,67 +1,76 @@
 package aps;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Escalonador {
 
-	
 	private int quantum;
 	private TabelaExecucao tabela = new TabelaExecucao();
 
-
-	public Escalonador(int quantum){
+	public Escalonador(int quantum) {
 		this.quantum = quantum;
 	}
+
 	public int getQuantum() {
 		return quantum;
 	}
 
-
-	public void addProcesso(String nome, int inicio, int tempo) {		
-		if(this.tabela.liberado()){
-			Processo p = new Processo(nome,inicio,tempo, Estados.Inativo);
- 			this.tabela.processos.add(p);
-			p.setStatus(Estados.Executando);
-		}	
-	}
-	
-	public void removeProcesso(String nomeProcesso){
-		for (int i = 0; i<this.tabela.processos.size(); i++){
-			if(this.tabela.processos.get(i).getNome().equals(nomeProcesso)){
-				this.tabela.processos.remove(this.tabela.processos.get(i));
-			}
-		}
-	}
-
-	public void mudarStatus (String nomeProcesso){
-		for (int i = 0; i < this.tabela.processos.size(); i++){
-			if(this.tabela.processos.get(i).getNome().equals(nomeProcesso)){
-				int resta = this.tabela.processos.get(i).getDuracao() - this.quantum;
-				if(resta > 0){
-					
-					this.tabela.processos.get(i).setStatus(Estados.Esperando);
-				
-				}else if(resta <= 0){			
-					
-					this.tabela.processos.get(i).setStatus(Estados.Finalizado);
-				
-				}else if(!(this.tabela.processos.contains(this.tabela.processos.get(i)))){
-					
-					this.tabela.processos.get(i).setStatus(Estados.Inativo);
-				
-				}
-			}
-		}
+	public void addProcesso(String nome, int chegada, int tempoExecucao) {
+		Processo p = new Processo(nome, chegada, tempoExecucao);
+		p.setStatus(Estado.Inativo);
+		this.tabela.processos.add(p);
 	}
 
 	public void setQuantum(int i) {
 		this.quantum = i;
-		
+
 	}
 
+	public void rodarProcessos() {
+		int tempoMaximo = 0;
+		for (Processo p : this.tabela.processos)tempoMaximo += p.getTempoExecucao();
+		for (int i = 0; i < tempoMaximo; i++) {
+			for (Processo p : this.tabela.processos) {
+				
+				if (p.getTempoExecutando()==p.getTempoExecucao()){
+					if (p.processoFinalizado()){
+						continue;
+					}else{
+						p.setStatus(Estado.Finalizado);
+						p.adicionaStatusLinhaProcessos(Estado.F.toString());
+						continue;
+					}
+				}else if (p.getRestante()==quantum && p.getStatus().equals(Estado.Executando) && tabela.processosFinalizados()){ 
+					p.setStatus(Estado.Esperando);
+					p.adicionaStatusLinhaProcessos(Estado.W.toString());
+					continue;
+				}
+				if (p.getChegada() == i || p.getStatus().equals(Estado.Esperando) || p.getStatus().equals(Estado.Executando)) {
+					if (tabela.liberado() || tabela.processoExecutando(p)) {
+						p.setStatus(Estado.Executando);
+						p.restante(1);
+						p.adicionaStatusLinhaProcessos(Estado.R.toString());					
+					} else  {
+						p.setStatus(Estado.Esperando);
+						p.adicionaStatusLinhaProcessos(Estado.W.toString());
+					}
+				} else  {
+					if (tabela.liberado()){
+						tempoMaximo++;
+					}
+					p.setStatus(Estado.Inativo);
+					p.adicionaStatusLinhaProcessos(Estado.I.toString());
+				}
 
-	public String getTabelaRR() {
-		// TODO Auto-generated method stub
-		return null;
+			}
+		}
+	}
+
+	public String getTabelaRR() {	
+		rodarProcessos();
+		String resultado = "";
+		for (Processo p : this.tabela.processos) {
+
+			resultado += p.getLinhaProcessos() + "\n";
+		}
+		return resultado;
 	}
 }
