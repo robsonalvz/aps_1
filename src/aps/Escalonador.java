@@ -32,6 +32,10 @@ public class Escalonador {
 		int tempoMaximo = 0;
 		for (Processo p : this.tabela.getProcessos())
 			tempoMaximo += p.getTempoExecucao();
+		if (this.tabela.getProcessos().size()==1){
+			tempoMaximo++;
+			System.out.println("AA");
+		}
 		for (int i = 0; i < tempoMaximo; i++) {
 			for (Processo p : this.tabela.getProcessos()) {
 
@@ -79,7 +83,7 @@ public class Escalonador {
 					if (tabela.liberado()) {
 
 						tempoMaximo++;
-					}
+					} 
 					p.setStatus(Estado.Inativo);
 					p.adicionaStatusLinhaProcessos(Estado.I.toString());
 				}

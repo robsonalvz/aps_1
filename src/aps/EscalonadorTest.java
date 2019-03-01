@@ -15,7 +15,6 @@ public class EscalonadorTest {
 		escalonador.addProcesso("P3",0,10);
 		
 		String tabela = escalonador.getTabelaRR();
-		System.out.println(tabela);
 		String tabelaTest = "RRRF\n"+
 		                    "WWWRRRF\n"+
 				            "WWWWWWRRRRRRRRRR\n";
@@ -111,7 +110,7 @@ public class EscalonadorTest {
 		
 		String tabela = escalonador.getTabelaRR();
 		System.out.println(tabela);
-		String tabelaTest = "RRRRRF";
+		String tabelaTest = "RRRRRF\n";
 		
 		assertEquals(tabela,tabelaTest);
 		
