@@ -5,7 +5,6 @@ import java.util.Collections;
 
 public class Processo {
 	private String nome;
-	
 	private int tempoExecucao;
 	private int chegada;
 	private Estado status;
@@ -52,6 +51,7 @@ public class Processo {
 	}
 	public void setStatus(Estado status) {
 		this.status = status;
+		
 	}
 
 	public String getLinhaProcessos() {

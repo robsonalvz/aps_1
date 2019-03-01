@@ -5,7 +5,10 @@ public class Escalonador {
 	private int quantum;
 	private TabelaExecucao tabela = new TabelaExecucao();
 
-	public Escalonador(int quantum) {
+	public Escalonador(int quantum) throws QuantumValueException{
+		if (quantum<=0){
+			throw new QuantumValueException("Valor do quantum inválido");
+		}
 		this.quantum = quantum;
 	}
 
@@ -16,7 +19,7 @@ public class Escalonador {
 	public void addProcesso(String nome, int chegada, int tempoExecucao) {
 		Processo p = new Processo(nome, chegada, tempoExecucao);
 		p.setStatus(Estado.Inativo);
-		this.tabela.processos.add(p);
+		this.tabela.getProcessos().add(p);
 	}
 
 	public void setQuantum(int i) {
@@ -26,10 +29,10 @@ public class Escalonador {
 
 	public void rodarProcessos() {
 		int tempoMaximo = 0;
-		for (Processo p : this.tabela.processos)
+		for (Processo p : this.tabela.getProcessos())
 			tempoMaximo += p.getTempoExecucao();
 		for (int i = 0; i < tempoMaximo; i++) {
-			for (Processo p : this.tabela.processos) {
+			for (Processo p : this.tabela.getProcessos()) {
 
 				if (p.getTempoExecutando() == p.getTempoExecucao()) {
 					if (p.processoFinalizado()) {
@@ -42,6 +45,7 @@ public class Escalonador {
 				} else if (p.getRestante() == quantum && tabela.processoExecutando(p)) {
 					if (tabela.processosFinalizados()){
 						p.setStatus(Estado.Executando);
+						p.restante(1);
 						p.adicionaStatusLinhaProcessos(Estado.R.toString());
 						continue;
 					}else{
@@ -52,16 +56,18 @@ public class Escalonador {
 					
 				}
 				if (p.getChegada() == i || p.getStatus().equals(Estado.Esperando) || tabela.processoExecutando(p)) {
-					if (tabela.liberado() && tabela.liberado2() || tabela.processoExecutando(p)) {
-				
+					if (tabela.processoExecutando(p)){
+						p.setStatus(Estado.Executando);
+						p.restante(1);
+						p.adicionaStatusLinhaProcessos(Estado.R.toString());
+					}else
+					if (tabela.liberado() && tabela.isProcessosRodando() ) {
 							p.setStatus(Estado.Executando);
 							p.restante(1);
 							p.adicionaStatusLinhaProcessos(Estado.R.toString());
-							
-							
 							if (p.getTempoExecutando() == p.getTempoExecucao()) {
 									p.setStatus(Estado.Finalizado);
-									p.adicionaStatusLinhaProcessos(Estado.F.toString());
+								p.adicionaStatusLinhaProcessos(Estado.F.toString());
 								
 							}
 					} else {
@@ -83,7 +89,7 @@ public class Escalonador {
 	public String getTabelaRR() {
 		rodarProcessos();
 		String resultado = "";
-		for (Processo p : this.tabela.processos) {
+		for (Processo p : this.tabela.getProcessos()) {
 
 			resultado += p.getLinhaProcessos() + "\n";
 		}

@@ -1,6 +1,6 @@
 package aps;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -10,14 +10,15 @@ public class EscalonadorTest {
 	@Test
 	public void testeTresProcessos() {
 		Escalonador escalonador = new Escalonador(5);
-		escalonador.addProcesso("P1",0,10);
 		escalonador.addProcesso("P2",0,3);
-		escalonador.addProcesso("P3",3,3);
+		escalonador.addProcesso("P2",0,3);
+		escalonador.addProcesso("P3",0,10);
+		
 		String tabela = escalonador.getTabelaRR();
 		System.out.println(tabela);
-		String tabelaTest = "RRRRRWWWWWWRRRRF\n"+
-		                    "WWWWWRRRF\n"+
-				            "IIIWWWWWRRRF\n";
+		String tabelaTest = "RRRF\n"+
+		                    "WWWRRRF\n"+
+				            "WWWWWWRRRRRRRRRR\n";
 		assertEquals(tabela,tabelaTest);
 	}
 
@@ -38,29 +39,42 @@ public class EscalonadorTest {
 	@Test
 	public void testeQuatroProcessosDesordenados(){
 		Escalonador escalonador = new Escalonador(2);
-		escalonador.addProcesso("P1",1,2);
-		escalonador.addProcesso("P2",0,1);
-		escalonador.addProcesso("P3",5,5);	
-		escalonador.addProcesso("P4",4,1);
-		String tabela = escalonador.getTabelaRR();
-		String tabelaTest = "IRRF\n"
-				+ "RF\n"
-				+ "IIIIIRRRRRF\n"
-				+ "IIIIRF\n";
-		System.out.println(tabela);
-		assertEquals(tabela,tabelaTest);
+			escalonador.addProcesso("P1",1,2);
+			escalonador.addProcesso("P2",0,1);
+			escalonador.addProcesso("P3",5,5);	
+			escalonador.addProcesso("P4",4,1);
+			String tabela = escalonador.getTabelaRR();
+			String tabelaTest = "IRRF\n"
+					+ "RF\n"
+					+ "IIIIIRRRRRF\n"
+					+ "IIIIRF\n";
+			System.out.println(tabela);
+			assertEquals(tabela,tabelaTest);
+	
+	
 	}
 	@Test
 	public void testeQuantumZero(){
-		Escalonador escalonador = new Escalonador(0);
-		escalonador.addProcesso("P1",0,2);
-		assertEquals(0,escalonador.getQuantum());		
-	}
+		try{
+			Escalonador escalonador = new Escalonador(0);
+			fail();
+			escalonador.addProcesso("P1",0,2);
+			assertEquals(0,escalonador.getQuantum());		
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		}
+		
 	@Test
 	public void testeQuantumNegativo(){
-		Escalonador escalonador = new Escalonador(-1);
-		escalonador.addProcesso("P1",0,2);
-		assertEquals(-1,escalonador.getQuantum());		
+		try{
+			Escalonador escalonador = new Escalonador(-1);
+			fail();
+			escalonador.addProcesso("P1",0,2);
+		}catch (QuantumValueException e) {
+			System.err.println(e.getMessage());
+		}
+		
 	}
 	@Test
 	public void testeProcessosSeguidos(){
@@ -74,6 +88,7 @@ public class EscalonadorTest {
 		assertEquals(tabela,tabelaTest);
 		
 	}
+
 	
 
 }
