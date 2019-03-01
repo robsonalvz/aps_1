@@ -1,0 +1,76 @@
+package com.jogodavelha;
+import javax.swing.JOptionPane;
+public class Jogo {
+	
+	/*para cada objeto P (proceso) criado acrecentar os argumentos:tamanhoProcesso;
+	e incicioProcessamento*/
+
+	
+	//As variáveis (tamanhoProcesso e o  inícioProcessamento) pode varia (tamanho e a Posisão) por isso o método random
+	
+	//int inicioProcessamento;
+ public static void main(String args[])
+ {
+		//qtd referese a quantidade de processos
+		// primeira coluna tamanho processo
+		//segunda  " inicio processo
+		
+	//	for(int qtd=1; qtd<=15; qtd++)
+	 int tamanho = tamanhoProcesso();
+System.out.println(tamanho);
+     int inicio = inicioProcesso();
+     System.out.println(inicio);
+     int quantu =3;
+    int escalonador = escalonar(quantu,inicio , tamanho);
+    System.out.println(escalonador);
+ }
+//1ª Etapa: Metodo1 para TAMANHO do processo
+//TRANSFORMAR EM PRIVADO
+ // A EXCESSÃO é quando o processo tem valor ZERO(não existe)
+	public static int tamanhoProcesso()
+	{
+		int tamanho=0;
+	 for(int x= 1; x <= 1; x++)
+			{
+				int num = (int) (Math.random()* 10);
+			//	System.out.println(num+ " ");	
+		       tamanho = num;
+	
+		
+			}// fim do for
+	 return (tamanho);
+} //fim do Metodo 1
+	
+	//1ª Etapa: Metodo2 para Inicio do processo
+	//TRANSFORMAR EM PRIVADO
+	public static int inicioProcesso()
+	{
+		int inicio=0;
+	 for(int x= 1; x <= 1; x++)
+			{
+				int num = (int) (Math.random()* 10);
+			//	System.out.println(num+ " ");	
+		       inicio = num;
+	
+		
+			}// fim do for
+	 return (inicio);
+} //fim do Metodo 2
+	
+	/**2ª Etapa : a)Criar metodo para Executar 15 PROCESSOS 
+	 b)com 2 ARGUMENTOS
+	que são os 2 METODOS:inicioProcesso() + tamanhoProcesso()
+	c) imprimir o QUANTUM dos processos (INEXISTENTE, EXECUTANDO,
+	 ESPERA,FINALIZADO)*/
+	
+	public static int escalonar( int quantu, int inicio,int tamanho) {
+		int q = quantu;
+		int i= inicio;
+		int t=tamanho;
+		// concertar o return com a função correta
+		return q+i+t ;
+	}
+	
+	
+} // fim da class
+
