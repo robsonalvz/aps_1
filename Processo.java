@@ -11,9 +11,13 @@ public class Processo {
 	private Estado status;
 	private int restante;
 	private ArrayList<String> linhaProcessos;
+	private ArrayList<String> espera = new ArrayList<>();
 
+ 	public void setLinhaProcessos(ArrayList<String> linhaProcessos) {
+		this.linhaProcessos = linhaProcessos;
+	}
 
- 	public Processo(String nome, int chegada, int tempoExecucao) {
+	public Processo(String nome, int chegada, int tempoExecucao) {
 		this.nome = nome;
 		this.chegada = chegada;
 		this.tempoExecucao = tempoExecucao;
@@ -79,14 +83,28 @@ public class Processo {
 		return restante;
 	}
 	public void restante(int quantum){
-<
-
-		this.restante -=quantum;
+		this.restante -= quantum;
 	}
 	public void setRestante(int restante) {
 		this.restante = restante;
 	}
-
+	public String getEsperando() {
+		String esperando="";
+		for(int i = 0; i < this.getTempoExecutando(); i++) {
+			if(this.getTempoExecutando() > 0) {
+				this.espera.add("W");
+			}else {
+				this.espera.add(null);
+			}
+			
+		}
+		
+		for(String s : this.espera) {
+			esperando += s;
+		}
+		return esperando;	
+		
+	}
 
 
 

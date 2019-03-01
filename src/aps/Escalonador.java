@@ -1,5 +1,5 @@
-package aps;import java.util.Collections;
-import java.util.*;
+
+package aps;
 
 public class Escalonador {
 
@@ -27,37 +27,51 @@ public class Escalonador {
 
 	public void rodarProcessos() {
 		int tempoMaximo = 0;
-		for (Processo p : this.tabela.processos) {
+		for (Processo p : this.tabela.processos)
 			tempoMaximo += p.getTempoExecucao();
-		}
-
-		for (int i = 0; i < tempoMaximo + 1; i++) {
+		for (int i = 0; i < tempoMaximo; i++) {
 			for (Processo p : this.tabela.processos) {
-				
-				if (p.getTempoExecutando()==p.getTempoExecucao()){
-					if (p.processoFinalizado()){
+
+				if (p.getTempoExecutando() == p.getTempoExecucao()) {
+					if (p.processoFinalizado()) {
 						continue;
-					}else{
+					} else {
 						p.setStatus(Estado.Finalizado);
 						p.adicionaStatusLinhaProcessos(Estado.F.toString());
 						continue;
 					}
-				}else if (p.getRestante()==quantum && p.getStatus().equals(Estado.Executando) && tabela.processosFinalizados()){ 
-					p.setStatus(Estado.Esperando);
-					p.adicionaStatusLinhaProcessos(Estado.W.toString());
-					continue;
-				}
-				if (p.getChegada() == i || p.getStatus().equals(Estado.Esperando) || p.getStatus().equals(Estado.Executando)) {
-					if (tabela.liberado() || tabela.processoExecutando(p)) {
+				} else if (p.getRestante() == quantum && tabela.processoExecutando(p)) {
+					if (tabela.processosFinalizados()){
 						p.setStatus(Estado.Executando);
-						p.restante(1);
-						p.adicionaStatusLinhaProcessos(Estado.R.toString());					
-					} else  {
+						p.adicionaStatusLinhaProcessos(Estado.R.toString());
+						continue;
+					}else{
+						p.setStatus(Estado.Esperando);
+						p.adicionaStatusLinhaProcessos(Estado.W.toString());
+						continue;
+					}
+					
+				}
+				if (p.getChegada() == i || p.getStatus().equals(Estado.Esperando) || tabela.processoExecutando(p)) {
+					if (tabela.liberado() && tabela.liberado2() || tabela.processoExecutando(p)) {
+				
+							p.setStatus(Estado.Executando);
+							p.restante(1);
+							p.adicionaStatusLinhaProcessos(Estado.R.toString());
+							
+							
+							if (p.getTempoExecutando() == p.getTempoExecucao()) {
+									p.setStatus(Estado.Finalizado);
+									p.adicionaStatusLinhaProcessos(Estado.F.toString());
+								
+							}
+					} else {
 						p.setStatus(Estado.Esperando);
 						p.adicionaStatusLinhaProcessos(Estado.W.toString());
 					}
-				} else  {
-					if (tabela.liberado()){
+				} else {
+					if (tabela.liberado()) {
+
 						tempoMaximo++;
 					}
 					p.setStatus(Estado.Inativo);
@@ -68,17 +82,14 @@ public class Escalonador {
 		}
 	}
 
-	public String getTabelaRR() {	
+
+
+	public String getTabelaRR() {
 		rodarProcessos();
 		String resultado = "";
 		for (Processo p : this.tabela.processos) {
-			
-			if(this.tabela.processos.size() == 1) {
-				resultado +=  p.getLinhaProcessos();
-			}else {
-				resultado +=  p.getLinhaProcessos() + "\n";
-			}
-			
+
+			resultado += p.getLinhaProcessos() + "\n";
 		}
 		return resultado;
 	}
