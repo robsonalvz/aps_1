@@ -23,7 +23,7 @@ public class TabelaExecucao {
 		return Executando;
 	}
 
-	public boolean liberado(){
+	private boolean liberado(){
 		for(int i = 0; i < this.processos.size(); i++){
 			if(this.processos.contains(this.processo)){
 				for(int k = 0; k < this.processos.size(); k++){
@@ -36,6 +36,18 @@ public class TabelaExecucao {
 			}
 		}
 		return true;
+	}
+	
+	private boolean liberado2() {
+		boolean liberar = false;
+		for( Processo p : this.processos) {
+			if(p.getStatus() != null && p.getStatus().equals(Executando)){
+				liberar = false;
+			}else{
+				liberar = true;
+			}
+		}
+		return liberar;
 	}
 
 

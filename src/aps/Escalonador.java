@@ -107,36 +107,38 @@ public class Escalonador {
 	}
 	
 	public void run2() {
-		
+		boolean liberar = true;
 		int tempoMaximo =0 ;
 		for (Processo p: this.tabela.processos) {
 			tempoMaximo += p.getTempoExecucao();
 		}
 		
-		for (int i=0;i<tempoMaximo+1;i++) { //     -          RODOU = 0  Q = 3  TE = 3
+		for (int i=0;i<tempoMaximo+1;i++) {
 			for (Processo p : this.tabela.processos) {
-					if(p.getRestante() < p.getTempoExecucao() && p.getRestante() < this.quantum) {
-						if(tabela.liberado() || p.getStatus().equals(Estados.Executando)){
-							p.setStatus(Estados.Executando);
-							p.adicionaStatusLinhaProcessos(Estados.R.toString());
-							p.setRestante(p.getRestante()+1);
-						}else if(p.getChegada()==i) {
-							p.setStatus(Estados.Esperando);
-							p.adicionaStatusLinhaProcessos(Estados.W.toString());
-							p.setChegada(p.getChegada()+1);
-						}else {
-							p.setStatus(Estados.Inativo);
-							p.adicionaStatusLinhaProcessos(Estados.I.toString());
-						}
-					} else if(p.getRestante() == this.quantum && p.getRestante() < p.getTempoExecucao()) {
+				if(p.getRestante() < p.getTempoExecucao() && p.getRestante() < this.quantum) {
+					if(liberar == true || p.getStatus()==(Estados.Executando)){
+						p.setStatus(Estados.Executando);
+						p.adicionaStatusLinhaProcessos(Estados.R.toString());
+						p.setRestante(p.getRestante()+1);
+						liberar = false;
+					}else if(p.getChegada()==i) {
 						p.setStatus(Estados.Esperando);
 						p.adicionaStatusLinhaProcessos(Estados.W.toString());
 						p.setChegada(p.getChegada()+1);
 					}else {
-						p.setStatus(Estados.Finalizado);
-						p.adicionaStatusLinhaProcessos(Estados.F.toString());
+						p.setStatus(Estados.Inativo);
+						p.adicionaStatusLinhaProcessos(Estados.I.toString());
 					}
+				} else if(p.getRestante() == this.quantum && p.getRestante() < p.getTempoExecucao()) {
+					p.setStatus(Estados.Esperando);
+					p.adicionaStatusLinhaProcessos(Estados.W.toString());
+					p.setChegada(p.getChegada()+1);
+				}else {
+					p.setStatus(Estados.Finalizado);
+					p.adicionaStatusLinhaProcessos(Estados.F.toString());
+					liberar = true;
 				}
 			}
+		}
 	}
 }
