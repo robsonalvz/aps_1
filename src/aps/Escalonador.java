@@ -1,3 +1,4 @@
+
 package aps;
 
 public class Escalonador {
@@ -76,6 +77,7 @@ public class Escalonador {
 					}
 				} else {
 					if (tabela.liberado()) {
+
 						tempoMaximo++;
 					}
 					p.setStatus(Estado.Inativo);
@@ -85,6 +87,8 @@ public class Escalonador {
 			}
 		}
 	}
+
+
 
 	public String getTabelaRR() {
 		rodarProcessos();

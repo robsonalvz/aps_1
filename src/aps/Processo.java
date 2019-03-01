@@ -11,6 +11,7 @@ public class Processo {
 	private int restante;
 	private ArrayList<String> linhaProcessos;
 
+
  	public Processo(String nome, int chegada, int tempoExecucao) {
 		this.nome = nome;
 		this.chegada = chegada;
@@ -83,6 +84,7 @@ public class Processo {
 	public void setRestante(int restante) {
 		this.restante = restante;
 	}
+
 
 
 
