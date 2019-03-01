@@ -3,6 +3,9 @@ package aps;
 import static aps.Estados.Executando;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TabelaExecucao {
 	
@@ -11,6 +14,8 @@ public class TabelaExecucao {
 	
 	
 	public ArrayList<Processo> getProcessos() {
+		Comparator<Processo> compareByChegada = (Processo o1, Processo o2) -> ((Integer)o1.getChegada()).compareTo((Integer) o2.getChegada());
+		Collections.sort(processos,compareByChegada);
 		return processos;
 	}
 	
@@ -34,7 +39,7 @@ public class TabelaExecucao {
 	}
 
 
-
+	
 	public void setProcessos(ArrayList<Processo> processos) {
 		this.processos = processos;
 	}
@@ -42,6 +47,10 @@ public class TabelaExecucao {
 	public String getTabelaFinal() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public int getTamanhoTabela() {
+		return this.processos.size();
 	}
 
 	

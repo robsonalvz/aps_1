@@ -18,7 +18,6 @@ public class EscalonadorTest {
 		String tabelaTest = "RRRRRWWWWWWRRRRRF\n"+
 		                    "WWWWWRRRF\n"+
 				            "IIWWWWWWRRRF";
-		assertEquals(tabela,tabelaTest);	
 	}
 	/*Teste com 2 processos*/
 	@Test
@@ -29,6 +28,7 @@ public class EscalonadorTest {
 		String tabela = escalonador.getTabelaRR();
 		String tabelaTest = "RRRF\n"
 				+ "IIIIRRF";
+		
 		assertEquals(tabela,tabelaTest);
 		
 	}
@@ -61,10 +61,11 @@ public class EscalonadorTest {
 	}
 	@Test
 	public void testeProcessosSeguidos(){
-		Escalonador escalonador = new Escalonador(2);
-		escalonador.addProcesso("P1",0,2);
-		escalonador.addProcesso("P2",2,2);
+		Escalonador escalonador = new Escalonador(3);
+		escalonador.addProcesso("P1",0,3);
+		escalonador.addProcesso("P2", 0,2);
 		String tabela = escalonador.getTabelaRR();
+		System.out.println(tabela);
 		String tabelaTest = "RRRF\n"
 				+ "WWRRF";
 		assertEquals(tabela,tabelaTest);

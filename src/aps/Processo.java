@@ -1,24 +1,32 @@
 package aps;
 
- public class Processo {
+import java.util.ArrayList;
+
+public class Processo {
 	private String nome;
-	private int duracao;
+
 	private int tempoExecucao;
 	private int chegada;
 	private Estados status;
+	private int restante;
+	private ArrayList<String> linhaProcessos;
 
- 	public Processo(String nome, int duracao, Estados status) {
+ 	public Processo(String nome, int chegada, int tempoExecucao) {
 		this.nome = nome;
-		this.duracao = duracao;
-		this.status = status;
+		this.chegada = chegada;
+		this.tempoExecucao = tempoExecucao;
+		int restante = 0;
+		this.linhaProcessos = new ArrayList<>();
+		
 	}
 
  	public Processo() {
 		this.nome = null;
-		this.duracao = 0;
-		this.tempoExecucao = 0;
 		this.chegada = 0;
+		this.tempoExecucao = 0;		
 		this.status = null;
+		int restante = 0;
+		this.linhaProcessos = new ArrayList<>();
 	}
 
  	public String getNome() {
@@ -26,12 +34,6 @@ package aps;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public int getDuracao() {
-		return duracao;
-	}
-	public void setDuracao(int duracao) {
-		this.duracao = duracao;
 	}
 	public int getTempoExecucao() {
 		return tempoExecucao;
@@ -52,6 +54,23 @@ package aps;
 		this.status = status;
 	}
 
+	public ArrayList<String> getLinhaProcessos() {
+		return linhaProcessos;
+	}
+
+	public void adicionaStatusLinhaProcessos(String status) {
+		linhaProcessos.add(status);
+	}
+
+	public int getRestante() {
+		return restante;
+	}
+
+	public void setRestante(int restante) {
+		this.restante = restante;
+	}
+
 
 
  }
+
