@@ -47,7 +47,6 @@ public class EscalonadorTest {
 					+ "RF\n"
 					+ "IIIIIRRRRRF\n"
 					+ "IIIIRF\n";
-			System.out.println(tabela);
 			assertEquals(tabela,tabelaTest);
 	
 	
@@ -87,29 +86,13 @@ public class EscalonadorTest {
 		assertEquals(tabela,tabelaTest);
 		
 	}
-	@Test
-	public void testeQuatroProcessosQuatumTres() {
-		
-		Escalonador escalonador = new Escalonador(3);
-		escalonador.addProcesso("P1", 0, 3);
-		escalonador.addProcesso("P2", 0, 4);
-		escalonador.addProcesso("P3", 1, 2);
-		escalonador.addProcesso("P4", 2, 7);
-		
-		String tabela = escalonador.getTabelaRR();
-		String tabelaTest = "RRRF\n"
-				+ "WWWRRRWWWWWRF\n"
-				+ "IWWWWWRRF\n"
-				+"IIWWWWWWRRRWRRRRF\n";
-		assertEquals(tabela,tabelaTest);
-	}
+
 	@Test
 	public void testeComUmProcesso() {
 		Escalonador escalonador = new Escalonador(3);
 		escalonador.addProcesso("P1", 0, 5);
 		
 		String tabela = escalonador.getTabelaRR();
-		System.out.println(tabela);
 		String tabelaTest = "RRRRRF\n";
 		
 		assertEquals(tabela,tabelaTest);

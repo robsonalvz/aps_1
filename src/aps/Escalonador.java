@@ -34,7 +34,6 @@ public class Escalonador {
 			tempoMaximo += p.getTempoExecucao();
 		if (this.tabela.getProcessos().size()==1){
 			tempoMaximo++;
-			System.out.println("AA");
 		}
 		for (int i = 0; i < tempoMaximo; i++) {
 			for (Processo p : this.tabela.getProcessos()) {
